@@ -21,7 +21,7 @@ import Styles from "./styles/HomeStyles";
 
 class HomeScreen extends Component {
   static navigationOptions = {
-    drawerLabel: "Home"
+    title: "Restaurant Screen"
   };
   constructor(props) {
     super(props);
@@ -71,7 +71,14 @@ class HomeScreen extends Component {
       <View style={Styles.Container}>
         <View style={styles.InputContainer}>
           <TextInput
-            style={styles.Inputs}
+            style={{
+              height: 45,
+              marginHorizontal: 4,
+              marginVertical: 10,
+              borderBottomColor: "#FFFFFF",
+              backgroundColor: "#fff",
+              borderRadius: 4
+            }}
             placeholder="Search Restaurants ..."
             underlineColorAndroid="transparent"
             value={this.state.value}
@@ -87,7 +94,7 @@ class HomeScreen extends Component {
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate("ProfileScreen", {
-                    menuList: item.menu_list
+                    details: item
                   });
                 }}
               >

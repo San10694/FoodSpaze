@@ -1,10 +1,19 @@
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View, ScrollView } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  Dimensions
+} from "react-native";
 import StarRating from "react-native-star-rating";
+const { width, height } = Dimensions.get("window");
 
 export default class ProfileScreen extends Component {
   componentDidMount() {
-    console.log(" params ", this.props.navigation.getParam("menuList"));
+    console.log(" params ", this.props.navigation.getParam("details"));
   }
 
   renderItems(items) {
@@ -67,8 +76,10 @@ export default class ProfileScreen extends Component {
   }
 
   render() {
-    const menuList = this.props.navigation.getParam("menuList");
-    if (!menuList) {
+    const restaurantDetails = this.props.navigation.getParam("details");
+    console.log("restaurant details ", restaurantDetails);
+    const { menu_list } = restaurantDetails;
+    if (!restaurantDetails) {
       return (
         <View
           style={{ justifyContent: "center", alignItems: "center", flex: 1 }}
@@ -79,10 +90,35 @@ export default class ProfileScreen extends Component {
     }
     return (
       <ScrollView style={styles.container}>
+        <View
+          style={{
+            paddingTop: 5,
+            paddingHorizontal: 5
+          }}
+        >
+          <Image
+            source={{ uri: restaurantDetails.image_url }}
+            style={{
+              width: width - 10,
+              height: width * 0.6,
+              borderRadius: 4
+            }}
+          />
+        </View>
+        <Text
+          style={{
+            fontSize: 18,
+            fontWeight: "600",
+            textAlign: "center",
+            marginBottom: 4
+          }}
+        >
+          {restaurantDetails.name}
+        </Text>
         <Text style={styles.category}>VEG</Text>
-        {this.renderItems(menuList[0].Veg)}
+        {this.renderItems(menu_list ? menu_list[0].Veg : [])}
         <Text style={styles.category}>NON VEG</Text>
-        {this.renderItems(menuList[0].nonVeg)}
+        {this.renderItems(menu_list ? menu_list[0].nonVeg : [])}
       </ScrollView>
     );
   }

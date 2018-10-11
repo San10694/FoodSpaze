@@ -15,8 +15,7 @@ export default {
     height: height / 12,
     flexDirection: "row",
     alignItems: "center",
-    flex: 1,
-    marginRight: 10
+    flex: 1
   },
   Inputs: {
     height: 40,
@@ -27,6 +26,8 @@ export default {
     borderRadius: 4
   },
   LisItem: {
+    marginHorizontal: 4,
+
     flexDirection: "row",
     borderRadius: 1,
     backgroundColor: "#fff",

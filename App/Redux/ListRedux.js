@@ -45,7 +45,7 @@ export default function ListReducer(state = initialState, action) {
       if (payload && payload.length >= 1) {
         var items = [];
         var obj = { search_data_list: [] };
-        //console.log("state.contacts.data_list", state.contacts.data_list);
+
         var data = _.filter(state.filteredRestaurants, item => {
           if (
             item.name.toLowerCase().indexOf(action.payload.toLowerCase()) !== -1
@@ -62,7 +62,6 @@ export default function ListReducer(state = initialState, action) {
           filteredList: []
         };
       } else {
-        // console.log("serach list state", state);
         return {
           ...state,
           filteredByLocation: state.filteredRestaurants
@@ -86,9 +85,8 @@ function getFilteredByLocation(state, items) {
       state.currentLocation.coords,
       item.location
     );
-    // console.log("Distance ", (distance % 1000) + " km");
+
     item.distance = distance % 1000;
-    // console.log("updated items ", items);
   });
 
   return items.sort((a, b) => a.distance - b.distance);
